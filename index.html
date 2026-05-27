@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise</title>
+
+<style>
+  
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff78,#ff7eb3,#fad0c8);
+color:white;
+}
+
+.container{
+position:relative;
+z-index:2;
+text-align:center;
+width:90%;
+max-width:400px;
+}
+
+.card{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:25px;
+box-shadow:0 8px 30px rgba(0,0,0,0.2);
+animation:fade 1s ease;
+}
+
+.hidden{
+display:none;
+}
+
+input{
+width:85%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+text-align:center;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:12px 28px;
+border:none;
+border-radius:15px;
+background:white;
+color:#ff4f85;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.gift{
+font-size:100px;
+margin-top:20px;
+cursor:pointer;
+animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+}
+
+.typing{
+font-size:35px;
+animation:fade 2s ease;
+}
+
+.cake{
+font-size:120px;
+animation:cakeDance 1s infinite alternate;
+}
+
+@keyframes cakeDance{
+from{transform:rotate(-5deg);}
+to{transform:rotate(5deg);}
+}
+
+.message{
+font-size:18px;
+line-height:1.8;
+margin-top:15px;
+}
+
+.hearts{
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+.heart{
+position:absolute;
+font-size:24px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh) scale(0);
+opacity:1;
+}
+100%{
+transform:translateY(-10vh) scale(1.5);
+opacity:0;
+}
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:scale(0.8);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+</style>
+
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+
+<audio autoplay loop>
+<source src="https://files.catbox.moe/99x8kb.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+
+<div class="card" id="lockScreen">
+
+<h2>🔐 Secret Love Lock</h2>
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<button onclick="unlock()">Unlock ❤️</button>
+
+<p id="wrong"></p>
+
+</div>
+
+<div class="card hidden" id="giftScreen">
+
+<h2>Your Birthday Surprise 🎁</h2>
+
+<div class="gift" onclick="openGift()">🎁</div>
+
+<p>Click the gift baby ❤️</p>
+
+</div>
+
+<div class="card hidden" id="birthdayScreen">
+
+<h1 class="typing">Happy Birthday Abhii❤️</h1>
+
+</div>
+
+<div class="card hidden" id="cakeScreen">
+
+<div class="cake">🎂</div>
+
+<h2>Make a Wish✨</h2>
+
+</div>
+
+<div class="card hidden" id="message1">
+
+<h2>For My Favorite Person 💖</h2>
+
+<p class="message">
+
+Happy Birthday to the most special person in my life ❤️
+<br>
+No matter how far we are,
+you are always close to my heart 🥺
+  
+I wish I could hug you today,
+cut the cake with you,
+and celebrate your birthday beside you 😭🎂
+<br>
+
+But until we finally meet,
+please remember this:
+No distance can ever reduce my love for you 💞
+<br>
+Thank you for loving me,
+understanding me,
+and giving me another chance✨
+
+</p>
+
+</div>
+
+<div class="card hidden" id="message2">
+
+<h2>One More Thing... ❤️</h2>
+
+<p class="message">
+Thank you for being mine.
+
+<br>
+
+I promise to stay,
+love you endlessly,
+and annoy you forever 😭💖
+
+<br>
+Happy Birthday ullu🎉
+
+<br>
+
+Forever Yours ♾️❤️
+
+</p>
+
+</div>
+
+</div>
+
+  <script>
+  
+const correctPassword = "love123";
+
+setInterval(createHeart,300);
+
+function createHeart(){
+
+let heart=document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.getElementById("hearts").appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+
+function unlock(){
+
+let pass=document.getElementById("password").value;
+
+if(pass===correctPassword){
+
+document.getElementById("lockScreen").classList.add("hidden");
+
+document.getElementById("giftScreen").classList.remove("hidden");
+
+}else{
+
+document.getElementById("wrong").innerHTML="Wrong Password 😭";
+
+}
+
+}
+
+function openGift(){
+
+document.getElementById("giftScreen").classList.add("hidden");
+
+document.getElementById("birthdayScreen").classList.remove("hidden");
+
+setTimeout(()=>{
+
+document.getElementById("birthdayScreen").classList.add("hidden");
+
+document.getElementById("cakeScreen").classList.remove("hidden");
+
+},5000);
+
+setTimeout(()=>{
+
+document.getElementById("cakeScreen").classList.add("hidden");
+
+document.getElementById("message1").classList.remove("hidden");
+
+},10000);
+
+setTimeout(()=>{
+
+document.getElementById("message1").classList.add("hidden");
+
+document.getElementById("message2").classList.remove("hidden");
+
+},50000);
+
+}
+    </script>
+
+</body>
+
+</html>
