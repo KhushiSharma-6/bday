@@ -148,7 +148,7 @@ transform:scale(1);
 <body>
   <div class="hearts" id="hearts"></div>
 
-<audio autoplay loop>
+<audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/99x8kb.mp3" type="audio/mp3">
 </audio>
 
@@ -319,6 +319,13 @@ document.getElementById("message2").classList.remove("hidden");
 },50000);
 
 }
+    const music = document.getElementById("bgMusic");
+
+document.body.addEventListener("click", () => {
+
+music.play();
+
+}, { once: true });
     </script>
 
 </body>
